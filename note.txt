@@ -1,0 +1,186 @@
+import React from "react";
+import NavBar from "./NavBar";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Row from "react-bootstrap/Row";
+import * as formik from "formik";
+import * as yup from "yup";
+
+function CreateEmployee() {
+  const { Formik } = formik;
+
+  const schema = yup.object().shape({
+    name: yup.string().required(),
+    email: yup.string().required(),
+    username: yup.string().required(),
+    city: yup.string().required(),
+    state: yup.string().required(),
+    zip: yup.string().required(),
+    file: yup.mixed().required(),
+    terms: yup.bool().required().oneOf([true], "terms must be accepted"),
+  });
+
+  return (
+    <>
+      <NavBar />
+      <div>
+        <Formik
+          validationSchema={schema}
+          onSubmit={console.log}
+          initialValues={{
+            name: "",
+            email: "",
+            mobile: "",
+            designation: "",
+            gender: "",
+            course: "",
+            file: null,
+            terms: false,
+          }}
+        >
+          {({ handleSubmit, handleChange, values, touched, errors }) => (
+            <Form noValidate onSubmit={handleSubmit}>
+              <Row className="mb-3">
+                <Form.Group
+                  as={Col}
+                  md="4"
+                  controlId="validationFormik101"
+                  className="position-relative"
+                >
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="name"
+                    value={values.name}
+                    onChange={handleChange}
+                    isValid={touched.name && !errors.name}
+                  />
+                  <Form.Control.Feedback tooltip>
+                    Looks good!
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
+
+              <Row className="mb-3">
+                <Form.Group
+                  as={Col}
+                  md="4"
+                  controlId="validationFormik102"
+                  className="position-relative"
+                >
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    value={values.email}
+                    onChange={handleChange}
+                    isValid={touched.email && !errors.email}
+                  />
+
+                  <Form.Control.Feedback tooltip>
+                    Looks good!
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group
+                  as={Col}
+                  md="4"
+                  controlId="validationFormikUsername2"
+                ></Form.Group>
+              </Row>
+
+              <Row className="mb-3">
+                <Form.Group
+                  as={Col}
+                  md="4"
+                  controlId="validationFormik101"
+                  className="position-relative"
+                >
+                  <Form.Label>Mobile</Form.Label>
+                  <Form.Control
+                    type="phone"
+                    name="mobile"
+                    value={values.mobile}
+                    onChange={handleChange}
+                    isValid={touched.mobile && !errors.mobile}
+                  />
+                  <Form.Control.Feedback tooltip>
+                    Looks good!
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
+
+              <Row className="mb-3">
+                <Form.Group
+                  as={Col}
+                  md="4"
+                  controlId="validationFormik101"
+                  className="position-relative"
+                >
+                  <Form.Label>Designation</Form.Label>
+                 
+                  <Form.Control.Feedback tooltip>
+                    Looks good!
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
+
+              <Form.Group className="position-relative mb-3">
+                <Form.Label>File</Form.Label>
+                <Form.Control
+                  type="file"
+                  required
+                  name="file"
+                  onChange={handleChange}
+                  isInvalid={!!errors.file}
+                />
+                <Form.Control.Feedback type="invalid" tooltip>
+                  {errors.file}
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group className="position-relative mb-3">
+                <Form.Check
+                  required
+                  name="terms"
+                  label="Agree to terms and conditions"
+                  onChange={handleChange}
+                  isInvalid={!!errors.terms}
+                  feedback={errors.terms}
+                  feedbackType="invalid"
+                  id="validationFormik106"
+                  feedbackTooltip
+                />
+              </Form.Group>
+              <Button type="submit">Submit form</Button>
+            </Form>
+          )}
+        </Formik>
+      </div>
+    </>
+  );
+}
+
+export default CreateEmployee;
+
+
+
+
+
+           <Row className="mb-3" md="4">
+                <Form.Label>Designation</Form.Label>
+                <Field
+                  name="designation"
+                  as="select"
+                  onChange={handleChange}
+                  isInvalid={!errors.designation}
+                >
+                  <option value="">choose option</option>
+                  <option value="MCA">MCA</option>
+                  <option value="BCA">BCA</option>
+                  <option value="blBSCue">BSC</option>
+                </Field>
+                <Form.Control.Feedback type="invalid">
+                  {errors.designation}
+                </Form.Control.Feedback>
+              </Row>
