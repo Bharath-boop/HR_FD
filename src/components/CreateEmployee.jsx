@@ -15,9 +15,9 @@ function CreateEmployee() {
       e.preventDefault();
       const formData = new FormData(e.target);
       const formProps = Object.fromEntries(formData);
+
       // console.log(formProps);
       // const reader = new FileReader();
-
       // reader.addEventListener("load", () => {
       //   console.log(reader.result);
       // });
@@ -35,7 +35,6 @@ function CreateEmployee() {
         toast.success(res.data.message);
         navigate("/employee_list");
       }
-      console.log(res.data.message);
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -47,7 +46,7 @@ function CreateEmployee() {
       <hr />
       <h2 style={{ display: "flex", justifyContent: "center" }}>Create user</h2>
       <hr />
-      <div style={{padding:"50px", width:"550px"}}>
+      <div style={{ padding: "50px", width: "550px" }}>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-2">
             <Form.Label>Name</Form.Label>
@@ -57,6 +56,7 @@ function CreateEmployee() {
               name="name"
               required
             />
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group className="mb-2">
@@ -75,6 +75,7 @@ function CreateEmployee() {
               type="tel"
               placeholder="Enter mobile number"
               name="mobile"
+              pattern="[7-9]{1}[0-9]{9}"
               required
             />
           </Form.Group>

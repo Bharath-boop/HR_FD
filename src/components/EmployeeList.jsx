@@ -25,6 +25,7 @@ function EmployeeList() {
   const handleDelete = async (id) => {
     try {
       let res = await AxiosService.delete(`${ApiRoutes.GET_USER.path}/${id}`);
+      toast.warning("DATA DELETED  SUCCESSFUL")
       getData();
     } catch (error) {
       toast.error(error.response.data.message);

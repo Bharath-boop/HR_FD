@@ -13,7 +13,7 @@ function Signin() {
       e.preventDefault();
       const formData = new FormData(e.target);
       const formProps = Object.fromEntries(formData);
-      
+
       let res = await AxiosService.post(
         `${ApiRoutes.SIGN_IN.path}`,
         formProps,
@@ -29,6 +29,7 @@ function Signin() {
         if (res.data.role === "admin") navigate("/dashboard");
       }
     } catch (error) {
+      console.log(error);
       toast.error(error.response.data.message || error.message);
     }
   };
@@ -45,15 +46,12 @@ function Signin() {
       >
         <h2 className="Signin-head p-3">Signin to Continue</h2>
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" name="email" />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
@@ -61,12 +59,9 @@ function Signin() {
               name="password"
             />
           </Form.Group>
-          <Form.Group
-            className="mb-3"
-            controlId="formBasicCheckbox"
-          ></Form.Group>
+          <Form.Group className="mb-3"></Form.Group>
           <Button variant="primary" type="submit">
-            Submit
+            Login
           </Button>
         </Form>
       </div>

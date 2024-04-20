@@ -6,7 +6,6 @@ import AxiosService from "../Utils/AxiosService";
 import ApiRoutes from "../Utils/ApiRoutes";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-import { Col } from "react-bootstrap";
 
 function EditEmployee() {
   let [name, setName] = useState("");
@@ -33,13 +32,13 @@ function EditEmployee() {
         `${ApiRoutes.GET_USER.path}/edit/${id}`,
         data
       );
-      console.log(res);
+      // console.log(res);
       if (res.status === 200) {
         toast.success("EDIT SUCESSFULL");
         navigate("/employee_list");
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -56,7 +55,7 @@ function EditEmployee() {
         setcourse(res.data.users.Course);
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(response.error);
     }
   };
 
