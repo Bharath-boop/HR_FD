@@ -1,8 +1,52 @@
-# React + Vite
+This Project has a Emplyoee Mangaement System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+    It use from some Funtionality like
+    
+          1.create emplyoee
+          
+          2.edit employee
+          
+          3.delete employee
+          
+          4.and display the all emplyoee from table structure
+          
 
-Currently, two official plugins are available:
+Signin only for Admin
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  user name: admin@gmail.com
+  
+  password: Admin123
+  
+
+  The back end source file deploye in RENDER: URL: https://hr-be-2le4.onrender.com
+  
+
+  1.CREATE EMPLOYEE
+  
+      create employee has geting 
+      
+          1.name,
+          
+          2.email,
+          
+          3.mobile,
+          
+          4.designation,
+          
+          5.gender,
+          
+          6.course etc.
+          
+  this data dating in the backend server
+  
+
+  2.EDIT EMPLOYEE
+  
+      edit employee edit from the previous data in backend server
+      
+
+  3.DELETE EMPLOYEE
+  
+      Delete form the employee in the server useing by _id
+      
+  
