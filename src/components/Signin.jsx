@@ -38,7 +38,7 @@ function Signin() {
 
   return (
     <>{
-      load? <h1>LOADING.....</h1>:<div
+      load? <h1 style={{display:"flex",alignContent:"center",justifyContent:"center",padding:"50px"}}>LOADING.....</h1>:<div
       className="container p-5"
       style={{
         width: "500px",
