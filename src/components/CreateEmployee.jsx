@@ -6,6 +6,7 @@ import AxiosService from "../Utils/AxiosService";
 import ApiRoutes from "../Utils/ApiRoutes";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 
 function CreateEmployee() {
   let navigate = useNavigate();
@@ -155,6 +156,7 @@ function CreateEmployee() {
           </Button>
         </Form>
       </div>
+      <Footer/>
     </>
   );
 }

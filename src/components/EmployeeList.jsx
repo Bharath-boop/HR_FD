@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import Table from "react-bootstrap/Table";
-import Nav from "react-bootstrap/Nav";
+import Modal from "react-bootstrap/Modal";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -11,8 +11,13 @@ import { useLogout } from "../hook/Logout";
 import { toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 function EmployeeList() {
   const [search, setSearch] = useState("");
+
+  // const [show, setShow] = useState(false);
+  // const [vel, setVal] = useState(false);
+
   let navigate = useNavigate();
   let logout = useLogout();
   let [users, setUsers] = useState([]);
@@ -24,9 +29,14 @@ function EmployeeList() {
 
   const handleDelete = async (id) => {
     try {
-      let res = await AxiosService.delete(`${ApiRoutes.GET_USER.path}/${id}`);
-      toast.warning("DATA DELETED  SUCCESSFUL")
-      getData();
+      // setShow(true);
+      // if (vel) {
+        let res = await AxiosService.delete(`${ApiRoutes.GET_USER.path}/${id}`);
+        toast.warning("DATA DELETED  SUCCESSFUL");
+        getData();
+      // } else {
+      //   getData();
+      // }
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -49,6 +59,11 @@ function EmployeeList() {
       }
     }
   };
+  const handleNo = () => setShow(false);
+    const handleYes = () => {
+      setVal(true);
+      setShow(false);
+    };
 
   useEffect(() => {
     getData();
@@ -62,7 +77,14 @@ function EmployeeList() {
         style={{ display: "flex", justifyContent: "space-around" }}
       >
         <h4>Total Count: {users.length - 1}</h4>
-        <Button variant="outline-success" onClick={()=>{navigate("/user/create_employee")}}>Create Employee</Button>
+        <Button
+          variant="outline-success"
+          onClick={() => {
+            navigate("/user/create_employee");
+          }}
+        >
+          Create Employee
+        </Button>
       </div>
       <div>
         <Row className="p-2" style={{ display: "flex", justifyContent: "end" }}>
@@ -127,6 +149,22 @@ function EmployeeList() {
                       Delete
                     </Button>
                     {/* </div> */}
+                    {/* <Modal show={show} >
+                      <Modal.Header closeButton>
+                        <Modal.Title>Modal heading</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        Woohoo, you are reading this text in a modal!
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="danger" onClick={handleNo}>
+                          No
+                        </Button>
+                        <Button variant="primary" onClick={handleYes}>
+                          Yes
+                        </Button>
+                      </Modal.Footer>
+                    </Modal> */}
                   </td>
                 </tr>
               );
@@ -134,6 +172,7 @@ function EmployeeList() {
           </tbody>
         </Table>
       </div>
+      <Footer/>
     </>
   );
 }

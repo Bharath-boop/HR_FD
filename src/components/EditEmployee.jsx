@@ -6,6 +6,7 @@ import AxiosService from "../Utils/AxiosService";
 import ApiRoutes from "../Utils/ApiRoutes";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import Footer from "./Footer";
 
 function EditEmployee() {
   let [name, setName] = useState("");
@@ -215,6 +216,7 @@ function EditEmployee() {
           </Button>
         </Form>
       </div>
+      <Footer/>
     </>
   );
 }
