@@ -15,9 +15,6 @@ import Footer from "./Footer";
 function EmployeeList() {
   const [search, setSearch] = useState("");
 
-  // const [show, setShow] = useState(false);
-  // const [vel, setVal] = useState(false);
-
   let navigate = useNavigate();
   let logout = useLogout();
   let [users, setUsers] = useState([]);
@@ -29,14 +26,9 @@ function EmployeeList() {
 
   const handleDelete = async (id) => {
     try {
-      // setShow(true);
-      // if (vel) {
-        let res = await AxiosService.delete(`${ApiRoutes.GET_USER.path}/${id}`);
-        toast.warning("DATA DELETED  SUCCESSFUL");
-        getData();
-      // } else {
-      //   getData();
-      // }
+      let res = await AxiosService.delete(`${ApiRoutes.GET_USER.path}/${id}`);
+      toast.warning("DATA DELETED  SUCCESSFUL");
+      getData();
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -47,9 +39,7 @@ function EmployeeList() {
       let res = await AxiosService.get(`${ApiRoutes.GET_USER.path}`, {
         authenticate: ApiRoutes.GET_USER.authentication,
       });
-      // console.log(res.data.users);
       if (res.status === 200) {
-        // toast.success(res.data.message);
         setUsers(res.data.users);
       }
     } catch (error) {
@@ -59,11 +49,6 @@ function EmployeeList() {
       }
     }
   };
-  const handleNo = () => setShow(false);
-    const handleYes = () => {
-      setVal(true);
-      setShow(false);
-    };
 
   useEffect(() => {
     getData();
@@ -132,39 +117,31 @@ function EmployeeList() {
                   <td>{e.Course}</td>
                   <td>{e.createdAt}</td>
                   <td>
-                    {/* <div style={{display:"flex",justifyContent:"space-between"}}> */}
-                    <Button
-                      variant="info"
-                      onClick={() => navigate(`/user/edit_employee/${e._id}`)}
-                    >
-                      Edit
-                    </Button>
-                    &nbsp;
-                    <Button
-                      variant="danger"
-                      onClick={() => {
-                        handleDelete(e._id);
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-around",
                       }}
                     >
-                      Delete
-                    </Button>
-                    {/* </div> */}
-                    {/* <Modal show={show} >
-                      <Modal.Header closeButton>
-                        <Modal.Title>Modal heading</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        Woohoo, you are reading this text in a modal!
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="danger" onClick={handleNo}>
-                          No
-                        </Button>
-                        <Button variant="primary" onClick={handleYes}>
-                          Yes
-                        </Button>
-                      </Modal.Footer>
-                    </Modal> */}
+                      <Button
+                        variant="info"
+                        onClick={() => navigate(`/user/edit_employee/${e._id}`)}
+                      >
+                        Edit
+                      </Button>
+                      &nbsp;
+                      <Button
+                        variant="danger"
+                        onClick={() => {
+                          const box = window.confirm(
+                            "Conform to Delete the Record"
+                          );
+                          if (box === true) handleDelete(e._id);
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </div>
                   </td>
                 </tr>
               );
@@ -172,7 +149,7 @@ function EmployeeList() {
           </tbody>
         </Table>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
