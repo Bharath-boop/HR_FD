@@ -145,18 +145,7 @@ function CreateEmployee() {
             <Form.Control type="file" name="image" />
           </Form.Group> */}
 
-          <div className="custom-file">
-            <input
-              type="file"
-              name="avatar"
-              onChange={onChange}
-              className="custom-file-input"
-            />
-            <label className="custom-file-label" htmlFor="customFile">
-              Choose Avatar
-            </label>
-          </div>
-
+        
           <Button variant="primary" type="submit">
             Submit
           </Button>
