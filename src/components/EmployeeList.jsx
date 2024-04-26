@@ -20,8 +20,7 @@ function EmployeeList() {
   let [users, setUsers] = useState([]);
 
   const handleInputChange = (e) => {
-    const data = e.target.value;
-    setSearch(data);
+    setSearch(e.target.value);
   };
 
   const handleDelete = async (id) => {
@@ -49,6 +48,11 @@ function EmployeeList() {
       }
     }
   };
+  const data = {
+    nodes: users.filter((item) =>
+      item.name.toLowerCase().includes(search.toLowerCase())
+    ),
+  };
 
   useEffect(() => {
     getData();
@@ -61,7 +65,7 @@ function EmployeeList() {
         className="mt-5"
         style={{ display: "flex", justifyContent: "space-around" }}
       >
-        <h4>Total Count: {users.length - 1}</h4>
+        <h4>Total Count: {users.length}</h4>
         <Button
           variant="outline-success"
           onClick={() => {
@@ -101,12 +105,11 @@ function EmployeeList() {
             </tr>
           </thead>
           <tbody>
-            {users.slice(1, users.length).map((e, i) => {
+            {data.nodes.map((e, i) => {
               return (
                 <tr key={i}>
                   <td>{i + 1}</td>
                   <td>
-                    {" "}
                     <img src={e.image} width={"75px"} />{" "}
                   </td>
                   <td>{e.name}</td>
@@ -117,31 +120,37 @@ function EmployeeList() {
                   <td>{e.Course}</td>
                   <td>{e.createdAt}</td>
                   <td>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-around",
-                      }}
-                    >
-                      <Button
-                        variant="info"
-                        onClick={() => navigate(`/user/edit_employee/${e._id}`)}
-                      >
-                        Edit
-                      </Button>
-                      &nbsp;
-                      <Button
-                        variant="danger"
-                        onClick={() => {
-                          const box = window.confirm(
-                            "Conform to Delete the Record"
-                          );
-                          if (box === true) handleDelete(e._id);
+                    {e.role=== "admin" ? (
+                      "Admin has no changed "
+                    ) : (
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-around",
                         }}
                       >
-                        Delete
-                      </Button>
-                    </div>
+                        <Button
+                          variant="info"
+                          onClick={() =>
+                            navigate(`/user/edit_employee/${e._id}`)
+                          }
+                        >
+                          Edit
+                        </Button>
+                        &nbsp;
+                        <Button
+                          variant="danger"
+                          onClick={() => {
+                            const box = window.confirm(
+                              "Conform to Delete the Record"
+                            );
+                            if (box === true) handleDelete(e._id);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    )}
                   </td>
                 </tr>
               );
