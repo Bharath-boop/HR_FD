@@ -16,13 +16,7 @@ function CreateEmployee() {
       e.preventDefault();
       const formData = new FormData(e.target);
       const formProps = Object.fromEntries(formData);
-
-      // console.log(formProps);
-      // const reader = new FileReader();
-      // reader.addEventListener("load", () => {
-      //   console.log(reader.result);
-      // });
-      // reader.readAsDataURL(formProps.image);
+      console.log(formProps);
 
       let res = await AxiosService.post(
         `${ApiRoutes.CREATE_EMPLOYEE.path}`,
@@ -151,12 +145,24 @@ function CreateEmployee() {
             <Form.Control type="file" name="image" />
           </Form.Group> */}
 
+          <div className="custom-file">
+            <input
+              type="file"
+              name="avatar"
+              onChange={onChange}
+              className="custom-file-input"
+            />
+            <label className="custom-file-label" htmlFor="customFile">
+              Choose Avatar
+            </label>
+          </div>
+
           <Button variant="primary" type="submit">
             Submit
           </Button>
         </Form>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
